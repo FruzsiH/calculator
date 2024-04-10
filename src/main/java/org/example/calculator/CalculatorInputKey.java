@@ -1,6 +1,6 @@
 package org.example.calculator;
 
-public enum CalculatorInputValue {
+public enum CalculatorInputKey {
 
     A, B, OPERATOR;
 }

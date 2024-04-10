@@ -1,7 +1,7 @@
-package org.example;
+package org.example.calculator;
 
 import java.util.Map;
 
 public interface Validator {
-    void validate(Map<CalculatorInputValue, String> input);
+    void validate(Map<CalculatorInputKey, String> input);
 }
