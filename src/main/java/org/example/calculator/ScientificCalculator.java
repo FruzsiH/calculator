@@ -1,34 +1,24 @@
 package org.example.calculator;
 
 import org.example.exception.InvalidCalculatorTypeException;
+import org.example.operator.Power;
+import org.example.operator.Root;
 
 import java.util.Map;
 
 public class ScientificCalculator extends Calculator {
-    @Override
-    public void validate(Map<CalculatorInputKey, String> input) {
-        try {
-            super.validate(input);
-        } catch (InvalidCalculatorTypeException ignored) {
-        }
+
+    public ScientificCalculator() {
+        super();
+        operatorMap.put("$", new Power());
+        operatorMap.put("#", new Root());
     }
 
     @Override
-    public double calculate(Map<CalculatorInputKey, String> input) {
-        int a = Integer.parseInt(input.get(CalculatorInputKey.A));
-        int b = Integer.parseInt(input.get(CalculatorInputKey.B));
-        String operator = input.get(CalculatorInputKey.OPERATOR);
-
-        switch (operator) {
-            case "$" -> {
-                return Math.pow(a, b);
-                }
-            case "#" -> {
-                return Math.pow(a, (double) 1 /b);
-            }
-            default -> {
-                return super.calculate(input);
-            }
+    public ValidationResult validate(CalculatorInput input) {
+        if (!operatorMap.containsKey(input.getOperator())) {
+            return ValidationResult.INVALID_INPUT;
         }
+        return ValidationResult.OK;
     }
 }
